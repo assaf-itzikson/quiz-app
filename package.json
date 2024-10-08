@@ -9,7 +9,7 @@
     "dev": "concurrently \"node index.js\" \"vite\""
   },
   "keywords": [],
-  "author": "",
+  "author": "Assaf Itzikson",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.3",

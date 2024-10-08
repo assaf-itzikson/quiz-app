@@ -17,9 +17,7 @@ This is a simple Quiz App that fetches questions from the Open Trivia Database a
 - JavaScript
 - Express (for backend routing)
 
-## Setup
+## How to play
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/assaf-itzikson/quiz-app.git
-   cd quiz-app
+Navigate to https://assaf-itzikson.github.io/quiz-app/ <br>
+When the user answers 10 questions, the quiz will end and the user will see their score.

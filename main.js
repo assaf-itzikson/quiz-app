@@ -10,12 +10,23 @@ function decodeHtmlEntities(text) {
 }
 
 async function fetchQuestions() {
+  questions = [];
+
   try {
-    const response = await fetch('https://opentdb.com/api.php?amount=50&type=multiple');
-    const data = await response.json();
-    const filteredCategories = ['Entertainment: Music', 'Entertainment: Film'];
-    questions = data.results
-      .filter(item => filteredCategories.includes(item.category) && item.difficulty !== 'hard')
+    const response1 = await fetch('https://opentdb.com/api.php?amount=50&type=multiple&category=11');
+    const data1 = await response1.json();
+
+    // Wait for 5 seconds before sending the next request
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    const response2 = await fetch('https://opentdb.com/api.php?amount=50&type=multiple&category=12');
+    const data2 = await response2.json();
+
+    const combinedResults = [...data1.results, ...data2.results];
+
+    questions = combinedResults
+      .filter(item => item.difficulty !== 'hard')
+      .sort(() => Math.random() - 0.5) // Shuffle the questions
       .slice(0, 10)
       .map(item => ({
         category: decodeHtmlEntities(item.category),
@@ -100,6 +111,9 @@ function checkAnswer() {
 }
 
 function displayScore() {
+  // Change the h1 title to "results"
+  document.querySelector('h1').textContent = 'Results';
+
   const questionContainer = document.getElementById('question-container');
   questionContainer.innerHTML = `
     <h2>Quiz Completed!</h2>
@@ -114,6 +128,8 @@ function displayScore() {
     questions = [];
     correctAnswers = 0;
     incorrectAnswers = 0;
+    // Change the h1 title back to the original title
+    document.querySelector('h1').textContent = 'Film & Music trivia';
     fetchQuestions();
   };
 }

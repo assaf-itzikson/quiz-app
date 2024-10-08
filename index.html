@@ -27,7 +27,6 @@
       try {
         const response = await fetch('https://opentdb.com/api.php?amount=50&type=multiple');
         const data = await response.json();
-        console.log('Fetched questions:', data);
         const filteredCategories = ['Entertainment: Music', 'Entertainment: Film'];
         questions = data.results
           .filter(item => filteredCategories.includes(item.category) && item.difficulty !== 'hard')
